@@ -1,19 +1,21 @@
-from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.helpers.typing import ConfigType
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.core import HomeAssistant
+import logging
 
-from .sensor import AirspaceCountSensor
 from .const import DOMAIN
 
-async def async_setup_entry(
-    hass: HomeAssistant,
-    entry: ConfigEntry,
-    async_add_entities: AddEntitiesCallback,
-):
-    url = entry.data["url"]
-    lat = entry.data["latitude"]
-    lon = entry.data["longitude"]
+_LOGGER = logging.getLogger(__name__)
 
-    async_add_entities([AirspaceCountSensor(url, lat, lon)])
+PLATFORMS = ["sensor"]
+
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    hass.data.setdefault(DOMAIN, {})
+    hass.data[DOMAIN][entry.entry_id] = entry.data
+    _LOGGER.info(f"Airspace Tracker entry stored: {entry.data}")
+    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    return True
+
+async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
+    hass.data[DOMAIN].pop(entry.entry_id)
     return True
