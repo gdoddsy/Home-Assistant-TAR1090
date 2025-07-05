@@ -2,7 +2,7 @@
     "name": "Airspace Tracker",
     "content_in_root": false,
     "domain": "airspace_tracker",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "documentation": "https://github.com/gdoddsy/Home-Assistant-TAR1090",
     "requirements": ["requests"],
     "config_flow": false
