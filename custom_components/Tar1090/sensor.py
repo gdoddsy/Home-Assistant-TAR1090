@@ -1,6 +1,7 @@
-import requests
 from homeassistant.helpers.entity import Entity
+import requests
 from math import radians, cos, sin, sqrt, atan2, degrees
+
 
 def haversine(lat1, lon1, lat2, lon2):
     R = 6371.0
@@ -16,9 +17,10 @@ def bearing(lat1, lon1, lat2, lon2):
         sin(radians(lat1)) * cos(radians(lat2)) * cos(dlon)
     return (degrees(atan2(y, x)) + 360) % 360
 
+
 class AirspaceCountSensor(Entity):
-    def __init__(self, name, url, lat, lon):
-        self._attr_name = name
+    def __init__(self, url, lat, lon):
+        self._attr_name = "Airspace Currently Tracking"
         self._attr_unique_id = "airspace_current_count"
         self.url = url
         self.rx_lat = lat
@@ -55,9 +57,3 @@ class AirspaceCountSensor(Entity):
         aircraft = self.fetch_data()
         return len(self.enrich_flights(aircraft))
     
-    def setup_platform(hass, config, add_entities, discovery_info=None):
-        url = config.get("url", "http://localhost:8080/data/aircraft.json")
-        lat = config.get("latitude", 0)
-        lon = config.get("longitude", 0)
-        name = config.get("name", "Airspace Currently Tracking")
-        add_entities([AirspaceCountSensor(name, url, lat, lon)])

@@ -5,6 +5,7 @@
     "documentation": "https://github.com/gdoddsy/Home-Assistant-TAR1090",
     "requirements": ["requests"],
     "dependencies": [],
-    "codeowners": ["@gdoddsy"]
+    "codeowners": ["@gdoddsy"],
+    "config_flow": true
   }
   
