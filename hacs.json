@@ -1,0 +1,9 @@
+{
+    "name": "Airspace Tracker",
+    "content_in_root": false,
+    "domain": "airspace_tracker",
+    "version": "0.1.0",
+    "documentation": "https://github.com/HomeAssistant/Add-ons/Tar1090",
+    "requirements": ["requests"],
+    "config_flow": false
+  }
