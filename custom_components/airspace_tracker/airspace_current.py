@@ -26,7 +26,7 @@ class AirspaceCurrentSensor(Entity):
         
         # store data for history
         for f in enriched:
-            log_flight_seen(
+            await log_flight_seen(
                 f["flight_number"],
                 distance=f["distance_km"],
                 position=f["position"],
@@ -35,9 +35,6 @@ class AirspaceCurrentSensor(Entity):
             )
 
 
-        #sorting is a UI problem
-        #enriched.sort(key=lambda f: f["distance_km"])
-    
         self._attr_state = len(enriched)
         self._attr_extra_state_attributes = {
             "flights": [
