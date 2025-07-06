@@ -117,7 +117,7 @@ Have an idea or feature request? Feel free to open an issue or pull request on [
 
 ## 🛠️ Credits
 
-Created by [@gdoddsy](https://github.com/gdoddsy), with a passion for aircraft tracking, spatial analytics, and beautiful Home Assistant dashboards.
+Created by [@gdoddsy](https://github.com/gdoddsy).
 
 Reverse geocoding powered by [Geopy](https://github.com/geopy/geopy) and OpenStreetMap Nominatim.
 
