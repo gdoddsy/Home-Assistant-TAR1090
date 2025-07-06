@@ -1,5 +1,4 @@
 # ✈️ Home Assistant TAR1090 Integration
-## 🏷️ Badges
 
 ![HACS Custom Repository](https://img.shields.io/badge/HACS-Custom%20Repository-blue.svg)
 ![Integration Type](https://img.shields.io/badge/Home%20Assistant-Integration-orange)
