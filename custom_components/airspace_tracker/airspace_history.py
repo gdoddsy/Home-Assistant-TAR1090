@@ -14,10 +14,7 @@ class AirspaceHistorySensor(Entity):
         self._attr_icon = "mdi:radar"
         self._attr_state = None
         self._attr_extra_state_attributes = {}
-        self.date_key = datetime.now().strftime("%Y-%m-%d")
 
-         # 🧭 Set relative path to flight log inside your component folder
-        self.data_path = get_data_path(f"flight_log_{self.date_key}.json")
 
     async def async_update(self):
         last_seen_map = {}
@@ -25,9 +22,13 @@ class AirspaceHistorySensor(Entity):
         total_seen = 0
         furthest = {}
 
-        if os.path.exists(self.data_path):
+        # 🧭 Set relative path to flight log inside your component folder
+        date_key = datetime.now().strftime("%Y-%m-%d")
+        data_path = get_data_path(f"flight_log_{date_key}.json")
+        
+        if os.path.exists(data_path):
             try:
-                with open(self.data_path, "r") as f:
+                with open(data_path, "r") as f:
                     history = json.load(f)
 
                 # 🛩️ Flight timestamps
@@ -41,7 +42,7 @@ class AirspaceHistorySensor(Entity):
                 furthest = history.get("furthest", {})
 
             except Exception as e:
-                _LOGGER.error(f"Failed to read flight log for {self.date_key}: {e}")
+                _LOGGER.error(f"Failed to read flight log for {date_key}: {e}")
 
         # 🧠 Set state and attributes
         self._attr_state = total_seen
